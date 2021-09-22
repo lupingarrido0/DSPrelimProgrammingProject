@@ -1,33 +1,34 @@
 import java.util.Scanner;
 
-public class MenuItem<E> extends MyDoublyLinkedCircularList<E> {
-    DoublyLinkedNode<E> current;
+public class MenuItem<E> extends MySinglyLinkedList<E> {
+    Node<E> current;
     String label;
 
     MenuItem(String label) {
-        current = super.getTail().getNext();
+        super();
         this.label = label;
     }
 
     @Override
     public String toString() {
-        DoublyLinkedNode<E> current = getTail();
+        current = super.getHead();
         StringBuilder menu = new StringBuilder("[ ");
         do {
-            menu.append(current.getData().toString()).append(", ");
+            menu.append(current.getData());
+            if (current.getNext() != null) menu.append(", ");
             current = current.getNext();
-        } while (!current.equals(getTail()) || getSize() == 1);
+        } while (current != null || getSize() == 1);
         menu.append(" ]");
         return menu.toString();
     }
 
-    public DoublyLinkedNode<E> lookup(String data) {
+    public Node<E> lookup(String data) {
         if (getSize() == 0) return null;
-        DoublyLinkedNode<E> current = getTail();
+        Node<E> current = getHead();
         do {
             if (current.getData().toString().equals(data)) return current;
             current = current.getNext();
-        } while(!current.equals(getTail())|| getSize() == 1);
+        } while (current != null|| getSize() == 1);
         return null;
     }
 
@@ -38,10 +39,17 @@ public class MenuItem<E> extends MyDoublyLinkedCircularList<E> {
     }
 
     public void navigate() {
-        System.out.println(current.toString());
+        // current = super.getHead();
+        System.out.println(this);
         String choice = getInput("Input");
         if (choice.equalsIgnoreCase("x")) return;
         current = lookup(choice);
         navigate();
+    }
+
+    @Override
+    public void insert(E data) throws ListOverflowException {
+        super.insert(data);
+        current = super.getHead();
     }
 }
