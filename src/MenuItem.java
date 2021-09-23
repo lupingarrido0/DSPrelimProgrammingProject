@@ -5,7 +5,6 @@ public class MenuItem<E> extends MySinglyLinkedList<E> {
     String label;
 
     MenuItem(String label) {
-        super();
         this.label = label;
     }
 
@@ -24,11 +23,11 @@ public class MenuItem<E> extends MySinglyLinkedList<E> {
 
     public Node<E> lookup(String data) {
         if (getSize() == 0) return null;
-        Node<E> current = getHead();
+        Node<E> current = super.getHead();
         do {
-            if (current.getData().toString().equals(data)) return current;
+            if (current.getData().equals(data)) return current;
             current = current.getNext();
-        } while (current != null|| getSize() == 1);
+        } while (current != null|| super.getSize() == 1);
         return null;
     }
 
@@ -39,7 +38,6 @@ public class MenuItem<E> extends MySinglyLinkedList<E> {
     }
 
     public void navigate() {
-        // current = super.getHead();
         System.out.println(this);
         String choice = getInput("Input");
         if (choice.equalsIgnoreCase("x")) return;
@@ -50,6 +48,13 @@ public class MenuItem<E> extends MySinglyLinkedList<E> {
     @Override
     public void insert(E data) throws ListOverflowException {
         super.insert(data);
-        current = super.getHead();
+    }
+
+    public Node<E> getCurrent() {
+        return current;
+    }
+
+    public String getLabel() {
+        return label;
     }
 }
