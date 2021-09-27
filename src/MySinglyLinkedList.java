@@ -72,23 +72,13 @@ public class MySinglyLinkedList<E> implements MyList<E> {
      */
     public void insert(E data) throws ListOverflowException {
         Node<E> temp = new Node<>(data);
-        /*
+
         if (isEmpty()) head = temp;
         else tail.setNext(temp);
         tail = temp;
         size++;
 
-         */
-        if (isEmpty()) {
-            head = temp;
-        } else {
-            Node current = head;
-            while (current.getNext() != null) {
-                current = current.getNext();
-            }
-            current.setNext(temp);
-            if (getSize() == Integer.MAX_VALUE) throw new ListOverflowException("List is full.");
-        }
+        if (getSize() == Integer.MAX_VALUE) throw new ListOverflowException("List is full.");
     }
 
     /**

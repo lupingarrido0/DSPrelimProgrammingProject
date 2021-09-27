@@ -1,8 +1,8 @@
 import java.util.Scanner;
 
 public class MenuItem<E> extends MySinglyLinkedList<E> {
-    Node<E> current;
-    String label;
+    private Node<E> current = null;
+    private String label;
 
     MenuItem(String label) {
         this.label = label;
@@ -10,6 +10,12 @@ public class MenuItem<E> extends MySinglyLinkedList<E> {
 
     @Override
     public String toString() {
+
+        if (super.getSize() == 0) {
+            current = null;
+            return null;
+        }
+
         current = super.getHead();
         StringBuilder menu = new StringBuilder("[ ");
         do {
