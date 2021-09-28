@@ -36,6 +36,14 @@ public class MenuItem<E> extends MySinglyLinkedList<E> {
         } while (current != null|| super.getSize() == 1);
         return null;
     }
+    
+    public void inputText() {
+        Scanner in = new Scanner(System.in);
+        System.out.print("Enter your input: ");
+        String output = in.nextLine();
+        System.out.println(output);
+        in.close();
+    }
 
     private String getInput(String prompt) {
         Scanner scanner = new Scanner(System.in);
